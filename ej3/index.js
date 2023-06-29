@@ -73,11 +73,6 @@ app.get("/products/:id", (req, res) => {
     res.status(404).send({ msg: `product with id ${req.params.id} not found` });
   }
 });
-app.get("/products/:nombre", (req, res) => {
-  const found = productos.some((product) => product.nombre == req.params.nombre);
-  if (found) {
-    res.send(productos.filter((product) => product.nombre == req.params.nombre));
-  } else {
-    res.status(404).send({ msg: `product with name ${req.params.nombre} not found` });
-  }
+app.get("/products/filter/:nombre", (req, res) => {
+  res.send(productos.filter((product) => product.nombre == req.params.nombre));
 });
