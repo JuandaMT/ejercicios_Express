@@ -59,6 +59,19 @@ app.delete("/id/:id", (req, res) => {
     res.status(404).send({ msg: `product with id ${req.params.id} not found` });
   }
 });
+
+app.get("/products/filter/price", (req, res) => {
+  const minPrice = req.query.min || 0;
+  const maxPrice = req.query.max || Infinity;
+
+  // Filtrar los productos por precio
+  const filteredProducts = productos.filter(
+    (product) => product.price >= minPrice && product.price <= maxPrice
+  );
+
+  res.send({ results: filteredProducts });
+});
+
 app.get("/productsBetween50and250", (req, res) => {
   res.send(
     productos.filter((product) => product.precio > 50 && product.precio < 250)
